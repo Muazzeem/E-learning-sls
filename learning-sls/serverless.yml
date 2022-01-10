@@ -1,0 +1,25 @@
+service: learning-sls
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: python3.8
+  layers: arn:aws:lambda:ap-southeast-1:940443069190:layer:request:2
+  lambdaHashingVersion: 20201221
+  stage: dev
+  region: ap-southeast-1
+  endpointType: regional
+  iam:
+    role: arn:aws:iam::940443069190:role/lambda-career-tutor-dev
+
+
+functions:
+  save-learning-user-contact-information:
+    name: save-course-users-information
+    handler: handler.lambda_handler
+    events:
+      - http:
+          path: /save-contact
+          method: post
+          cors: true
